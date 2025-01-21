@@ -19,18 +19,18 @@ if platform.is_win then
       },
    }
 elseif platform.is_mac then
-   options.default_prog = { '/opt/homebrew/bin/fish', '-l' }
+   -- For macOS, using Zsh (which is default on macOS) or Oh My Zsh if installed
+   options.default_prog = { '/bin/zsh', '-l' } -- Default to Zsh
    options.launch_menu = {
       { label = 'Bash', args = { 'bash', '-l' } },
-      { label = 'Fish', args = { '/opt/homebrew/bin/fish', '-l' } },
+      { label = 'Zsh', args = { '/bin/zsh', '-l' } },
       { label = 'Nushell', args = { '/opt/homebrew/bin/nu', '-l' } },
-      { label = 'Zsh', args = { 'zsh', '-l' } },
    }
 elseif platform.is_linux then
-   options.default_prog = { 'fish', '-l' }
+   -- For Linux, assuming you use Zsh
+   options.default_prog = { 'zsh', '-l' } -- Default to Zsh
    options.launch_menu = {
       { label = 'Bash', args = { 'bash', '-l' } },
-      { label = 'Fish', args = { 'fish', '-l' } },
       { label = 'Zsh', args = { 'zsh', '-l' } },
    }
 end

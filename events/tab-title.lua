@@ -229,7 +229,9 @@ function Tab:set_info(event_opts, tab, max_width)
       self.title = create_title('', self.locked_title, max_width, inset)
       return
    end
-   self.title = create_title(process_name, tab.active_pane.title, max_width, inset)
+   local cwd = tab.active_pane.current_working_dir
+   local title = cwd.path:match('^.+[/](.+)$')
+   self.title = create_title(process_name, title, max_width, inset)
 end
 
 function Tab:create_cells()
