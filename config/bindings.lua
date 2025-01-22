@@ -241,10 +241,17 @@ local mouse_bindings = {
 }
 
 return {
-   disable_default_key_bindings = true,
+   -- NOTE: Default key binding used for now.... does not seem to be too valuable to use custom one..
+   --disable_default_key_bindings = true,
    -- disable_default_mouse_bindings = true,
    leader = { key = 'Space', mods = mod.SUPER_REV },
-   keys = keys,
-   key_tables = key_tables,
+   -- keys = keys,
+   -- key_tables = key_tables,
    mouse_bindings = mouse_bindings,
+
+   -- Enable composed key behavior for Left Alt
+   send_composed_key_when_left_alt_is_pressed = true,
+
+   -- Enable composed key behavior for Right Alt
+   send_composed_key_when_right_alt_is_pressed = true,
 }
