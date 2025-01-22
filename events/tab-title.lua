@@ -94,9 +94,9 @@ local RENDER_VARIANTS = {
 ---@type table<string, Cells.SegmentColors>
 -- stylua: ignore
 local colors = {
-   text_default          = { bg = '#45475A', fg = '#1C1B19' },
+   text_default          = { bg = '#45475A', fg = 'white' },
    text_hover            = { bg = '#5D87A3', fg = '#1C1B19' },
-   text_active           = { bg = '#74c7ec', fg = '#11111B' },
+   text_active           = { bg = '#b5e88b', fg = '#11111B' },
 
    unseen_output_default = { bg = '#45475A', fg = '#FFA066' },
    unseen_output_hover   = { bg = '#5D87A3', fg = '#FFA066' },
@@ -104,7 +104,7 @@ local colors = {
 
    scircle_default       = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#45475A' },
    scircle_hover         = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#5D87A3' },
-   scircle_active        = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#74C7EC' },
+   scircle_active        = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#b5e88b' },
 }
 
 ---
@@ -123,13 +123,13 @@ end
 ---@param max_width number
 ---@param inset number
 local function create_title(process_name, base_title, max_width, inset)
-   local title
+   local title = base_title
 
-   if process_name:len() > 0 then
-      title = process_name .. ' ~ ' .. base_title
-   else
-      title = base_title
-   end
+   -- if process_name:len() > 0 then
+   --    title = process_name .. ' ~ ' .. base_title
+   -- else
+   --    title = base_title
+   -- end
 
    if base_title == 'Debug' then
       title = GLYPH_DEBUG .. ' DEBUG'
@@ -139,14 +139,6 @@ local function create_title(process_name, base_title, max_width, inset)
    if base_title:match('^InputSelector:') ~= nil then
       title = base_title:gsub('InputSelector:', GLYPH_SEARCH)
       inset = inset - 2
-   end
-
-   if title:len() > max_width - inset then
-      local diff = title:len() - max_width + inset
-      title = title:sub(1, title:len() - diff)
-   else
-      local padding = max_width - title:len() - inset
-      title = title .. string.rep(' ', padding)
    end
 
    return title
@@ -215,7 +207,6 @@ function Tab:set_info(event_opts, tab, max_width)
    ) ~= nil
    self.unseen_output = false
    self.unseen_output_count = 0
-
    if not event_opts.hide_active_tab_unseen or not tab.is_active then
       self.unseen_output, self.unseen_output_count = check_unseen_output(tab.panes)
    end
